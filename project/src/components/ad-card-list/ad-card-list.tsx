@@ -1,17 +1,15 @@
 import { Offer } from '../../types/offer';
 import AdCard from '../ad-card/ad-card';
-import {useState} from 'react';
 
 type AdCardListProps = {
     offers: Offer[];
+    setActiveOfferId(id:number): void;
 }
 
-export default function AdCardList({offers}: AdCardListProps): JSX.Element {
-  const [idActiveAdCard, setIdActiveAdCard] = useState({id:0});
-
+export default function AdCardList({offers, setActiveOfferId}: AdCardListProps): JSX.Element {
   return (
     <>
-      {offers.map((offer) => <AdCard onAdCardMouseOver = {setIdActiveAdCard} key={idActiveAdCard.id + offer.id} offer={offer}/>)};
+      {offers.map((offer) => <AdCard onAdCardMouseOver = {setActiveOfferId} key={offer.id} offer={offer}/>)};
     </>
   );
 }

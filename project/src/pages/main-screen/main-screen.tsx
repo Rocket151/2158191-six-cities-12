@@ -1,12 +1,16 @@
 import AdCardList from '../../components/ad-card-list/ad-card-list';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offer';
+import Map from '../../components/map/map';
+import { useState } from 'react';
 
 type MainScreenProps = {
    offers: Offer[];
 }
 
 export default function MainScreen({offers}: MainScreenProps): JSX.Element {
+  const [activeOfferId, setActiveOfferId] = useState(0);
+
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -70,12 +74,12 @@ export default function MainScreen({offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <AdCardList offers={offers} />
+                <AdCardList offers={offers} setActiveOfferId={setActiveOfferId}/>
 
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map offers={offers} activeOfferId={activeOfferId}/>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { getRatingStarsStyle } from '../../utils';
 
 type AdCardProps = {
     offer: Offer;
-    onAdCardMouseOver({id}:{id:number}): void;
+    onAdCardMouseOver(id:number): void;
 }
 
 export default function AdCard({offer, onAdCardMouseOver}: AdCardProps): JSX.Element {
@@ -13,7 +13,7 @@ export default function AdCard({offer, onAdCardMouseOver}: AdCardProps): JSX.Ele
   return (
     <article className="cities__card place-card" id ={offer.id.toString()} onMouseOver={(evt)=> {
       const target = evt.currentTarget as HTMLElement;
-      onAdCardMouseOver({id: +target.id});}}
+      onAdCardMouseOver(+target.id);}}
     >
       <div className="place-card__mark">
         <span>{isPremium ? 'Premium' : ''}</span>
