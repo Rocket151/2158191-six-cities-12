@@ -19,6 +19,11 @@ export enum AuthorizationStatus {
     Unknown = 'UNKNOWN',
 }
 
+export enum Actions {
+  PICK_CITY = 'PICK_CITY',
+  FILTER_OFFERS = 'FILTER_OFFERS'
+}
+
 export const RATING_STARS_STYLE_KOEF = 20;
 
 export enum AdClasses {

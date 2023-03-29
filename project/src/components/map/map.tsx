@@ -46,6 +46,7 @@ export default function Map(props: MapProps): JSX.Element {
         )
           .addTo(map);
       });
+      map.flyTo([offers[0].city.location.latitude, offers[0].city.location.longitude], 10);
     }
   }, [map, offers, activeOfferId]);
 
