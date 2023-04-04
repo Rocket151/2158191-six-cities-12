@@ -5,7 +5,7 @@ import { AdClasses } from '../../const';
 
 type AdCardProps = {
     offer: Offer;
-    onAdCardMouseOver(id:number): void;
+    onAdCardMouseOver?: (id:number) => void;
     isMainScreen: boolean;
 }
 
@@ -13,9 +13,9 @@ export default function AdCard({offer, onAdCardMouseOver, isMainScreen}: AdCardP
   const {isFavorite, isPremium, previewImage, price, title, type, rating} = offer;
 
   return (
-    <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} id ={offer.id.toString()} onMouseOver={(evt)=> {
+    <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} id ={offer.id.toString()} onMouseOver={onAdCardMouseOver ? (evt)=> {
       const target = evt.currentTarget as HTMLElement;
-      onAdCardMouseOver(+target.id);}}
+      onAdCardMouseOver(+target.id);} : undefined}
     >
       {
         isMainScreen &&

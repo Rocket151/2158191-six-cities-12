@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 import Header from '../../components/header/header';
 import PropertyReviewForm from '../../components/property-review-form/property-review-form';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
@@ -16,8 +15,8 @@ type OfferScreenProps = {
 
 export default function OfferScreen({offers, reviews}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
-  const [{isFavorite, isPremium, description, goods, host, images, rating, maxAdults, price, title, type, bedrooms}] = offers.filter((ad) => ad.id.toString() === id);
-  const [activeOfferId, setActiveOfferId] = useState(0);
+  const offer = offers.filter((ad) => ad.id.toString() === id);
+  const [{isFavorite, isPremium, description, goods, host, images, rating, maxAdults, price, title, type, bedrooms}] = offer;
 
   return (
     <div className="page">
@@ -109,13 +108,13 @@ export default function OfferScreen({offers, reviews}: OfferScreenProps): JSX.El
               </section>
             </div>
           </div>
-          <Map isMainScreen={false} offers={offers.slice(0,3)} activeOfferId={activeOfferId}/>
+          <Map isMainScreen={false} offers={[...offers.slice(0,3), ...offer]} activeOfferId={Number(id)}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <AdCardList isMainScreen={false} offers={offers.slice(0,3)} setActiveOfferId={setActiveOfferId}/>
+              <AdCardList isMainScreen={false} offers={offers.slice(0,3)} />
 
             </div>
           </section>
