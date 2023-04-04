@@ -4,6 +4,11 @@ export enum AppRoute {
   Login = '/login',
   Offer = '/offer'
 }
+
+export enum APIRoute {
+  Offers = '/hotels',
+}
+
 export enum CitiesName {
   AMSTERDAM = 'Amsterdam',
   COLOGNE = 'Cologne',
@@ -28,7 +33,9 @@ export enum SortingTypes {
 
 export enum Actions {
 PICK_CITY = 'PICK_CITY',
-FILTER_OFFERS = 'FILTER_OFFERS'
+FILTER_OFFERS = 'FILTER_OFFERS',
+LOAD_OFFERS = 'LOAD_OFFERS',
+SET_STATUS_OFFERS_DATA_LOADING = 'SET_STATUS_OFFERS_DATA_LOADING',
 }
 
 export const RATING_STARS_STYLE_KOEF = 20;
