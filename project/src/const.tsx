@@ -7,6 +7,8 @@ export enum AppRoute {
 
 export enum APIRoute {
   Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export enum CitiesName {
@@ -36,6 +38,10 @@ PICK_CITY = 'PICK_CITY',
 FILTER_OFFERS = 'FILTER_OFFERS',
 LOAD_OFFERS = 'LOAD_OFFERS',
 SET_STATUS_OFFERS_DATA_LOADING = 'SET_STATUS_OFFERS_DATA_LOADING',
+REQUIRE_AUTHORIZATION = 'REQUIRE_AUTHORIZATION',
+SET_USER_EMAIL = 'SET_USER_EMAIL',
+SET_ERROR = 'SET_ERROR',
+REDIRECT_ROUTE = 'REDIRECT_ROUTE',
 }
 
 export const RATING_STARS_STYLE_KOEF = 20;
@@ -55,3 +61,5 @@ export enum MapClasses {
 export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
+
+export const TIMEOUT_SHOW_ERROR = 2000;
