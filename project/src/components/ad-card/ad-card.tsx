@@ -2,6 +2,8 @@ import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import { getRatingStarsStyle } from '../../utils';
 import { AdClasses } from '../../const';
+import { offerInfoInitAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks';
 
 type AdCardProps = {
     offer: Offer;
@@ -10,10 +12,11 @@ type AdCardProps = {
 }
 
 export default function AdCard({offer, onAdCardMouseOver, isMainScreen}: AdCardProps): JSX.Element {
-  const {isFavorite, isPremium, previewImage, price, title, type, rating} = offer;
+  const {isFavorite, isPremium, previewImage, price, title, type, rating, id} = offer;
+  const dispatch = useAppDispatch();
 
   return (
-    <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} id ={offer.id.toString()} onMouseOver={onAdCardMouseOver ? (evt)=> {
+    <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} id ={id.toString()} onMouseOver={onAdCardMouseOver ? (evt)=> {
       const target = evt.currentTarget as HTMLElement;
       onAdCardMouseOver(+target.id);} : undefined}
     >
@@ -48,7 +51,12 @@ export default function AdCard({offer, onAdCardMouseOver, isMainScreen}: AdCardP
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{title}</Link>
+          <Link to={`/offer/${offer.id}`} onClick={() => {
+            dispatch(offerInfoInitAction(id.toString()));
+          }}
+          >
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
