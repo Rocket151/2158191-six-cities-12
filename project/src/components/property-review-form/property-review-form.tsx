@@ -27,7 +27,7 @@ export default function PropertyReviewForm({id}: {id: string}): JSX.Element {
       rating: null,
       review: '',
     });
-  }
+  };
 
   const submitHandle = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
@@ -35,7 +35,7 @@ export default function PropertyReviewForm({id}: {id: string}): JSX.Element {
     dispatch(sendOfferCommentAction({id, resetFormData, commentData:{
       comment: formData.review,
       rating: formData.rating,
-    }}));   
+    }}));
   };
 
   return (

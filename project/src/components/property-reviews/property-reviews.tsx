@@ -1,12 +1,8 @@
-import { Review } from '../../types/review';
+import { useAppSelector } from '../../hooks';
 import { getRatingStarsStyle } from '../../utils';
 
-
-type PropertyViewProps = {
-    reviews: Review[];
-}
-
-export default function PropertyReviews({reviews}: PropertyViewProps): JSX.Element {
+export default function PropertyReviews(): JSX.Element {
+  const reviews = useAppSelector((state) => state.currentOffer.comments);
 
   return (
     <>

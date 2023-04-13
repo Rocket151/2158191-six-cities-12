@@ -4,6 +4,7 @@ import useMap from '../../hooks/useMap';
 import {Offer} from '../../types/offer';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, MapClasses} from '../../const';
 import 'leaflet/dist/leaflet.css';
+import { useAppSelector } from '../../hooks';
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
@@ -19,15 +20,15 @@ const currentCustomIcon = new Icon({
 
 
 type MapProps = {
-   offers: Offer[];
-   activeOfferId: number | null;
    isMainScreen: boolean;
+   offers: Offer[];
 }
 
 
 export default function Map(props: MapProps): JSX.Element {
-  const {offers, activeOfferId, isMainScreen} = props;
+  const {isMainScreen, offers} = props;
 
+  const activeOfferId = useAppSelector((state) => state.currentOffer.currentOfferId);
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers[0]);
 

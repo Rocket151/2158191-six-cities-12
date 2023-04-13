@@ -3,9 +3,11 @@ import { Actions, AppRoute, AuthorizationStatus } from '../const';
 import { Offer } from '../types/offer';
 import { Review } from '../types/review';
 
-export const pickCity = createAction(Actions.PICK_CITY, (textContent: string | null) => ({
+export const pickCity = createAction(Actions.PICK_CITY, (textContent: string) => ({
   payload: textContent,
 }));
+
+export const setSortType = createAction<string>(Actions.SET_SORT_TYPE);
 
 export const requireAuthorization = createAction<AuthorizationStatus>(Actions.REQUIRE_AUTHORIZATION);
 
@@ -30,3 +32,5 @@ export const loadOfferComments = createAction<Review[]>(Actions.LOAD_OFFER_COMME
 export const setCurrentOfferDataLoading = createAction<boolean>(Actions.SET_CURRENT_OFFER_DATA_LOADING);
 
 export const setCommentDataSending = createAction<boolean>(Actions.SET_COMMENT_DATA_SENDING);
+
+export const setCurrentOfferId = createAction<number | null>(Actions.SET_CURRENT_OFFER_ID);

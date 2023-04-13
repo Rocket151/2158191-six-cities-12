@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { SortingTypes } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setSortType } from '../../store/action';
 
-type SortingTypeFormProps = {
-    onSortingTypeClick(value: string | null): void;
-    sortingType: string | null;
-}
-
-export default function SortingTypeForm({onSortingTypeClick, sortingType}: SortingTypeFormProps): JSX.Element {
+export default function SortingTypeForm(): JSX.Element {
   const [sortingOptionsOpened, setSortingOptionsOpened] = useState(false);
+  const sortType = useAppSelector((state) => state.sortType);
+  const dispatch = useAppDispatch();
 
   return(
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0} onClick={() => setSortingOptionsOpened(!sortingOptionsOpened)}>
-        { sortingType}
+        {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -24,14 +23,14 @@ export default function SortingTypeForm({onSortingTypeClick, sortingType}: Sorti
           if(target.tagName !== 'LI') {
             return;
           }
-          onSortingTypeClick(target.textContent);
+          dispatch(setSortType(target.textContent || ''));
           setSortingOptionsOpened(!sortingOptionsOpened);
         }}
       >
-        <li className={`places__option ${sortingType === SortingTypes.Popular ? 'places__option--active' : ''}`} tabIndex={0}>Popular</li>
-        <li className={`places__option ${sortingType === SortingTypes.LowToHigh ? 'places__option--active' : ''}`} tabIndex={0}>Price: low to high</li>
-        <li className={`places__option ${sortingType === SortingTypes.HighToLow ? 'places__option--active' : ''}`} tabIndex={0}>Price: high to low</li>
-        <li className={`places__option ${sortingType === SortingTypes.TopRated ? 'places__option--active' : ''}`} tabIndex={0}>Top rated first</li>
+        <li className={`places__option ${sortType === SortingTypes.Popular ? 'places__option--active' : ''}`} tabIndex={0}>Popular</li>
+        <li className={`places__option ${sortType === SortingTypes.LowToHigh ? 'places__option--active' : ''}`} tabIndex={0}>Price: low to high</li>
+        <li className={`places__option ${sortType === SortingTypes.HighToLow ? 'places__option--active' : ''}`} tabIndex={0}>Price: high to low</li>
+        <li className={`places__option ${sortType === SortingTypes.TopRated ? 'places__option--active' : ''}`} tabIndex={0}>Top rated first</li>
       </ul>
     </form>
   );

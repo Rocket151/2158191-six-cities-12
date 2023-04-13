@@ -4,21 +4,21 @@ import { getRatingStarsStyle } from '../../utils';
 import { AdClasses } from '../../const';
 import { offerInfoInitAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
+import { setCurrentOfferId } from '../../store/action';
 
 type AdCardProps = {
     offer: Offer;
-    onAdCardMouseOver?: (id:number) => void;
     isMainScreen: boolean;
 }
 
-export default function AdCard({offer, onAdCardMouseOver, isMainScreen}: AdCardProps): JSX.Element {
+export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element {
   const {isFavorite, isPremium, previewImage, price, title, type, rating, id} = offer;
   const dispatch = useAppDispatch();
 
   return (
-    <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} id ={id.toString()} onMouseOver={onAdCardMouseOver ? (evt)=> {
+    <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} id ={id.toString()} onMouseOver={isMainScreen ? (evt)=> {
       const target = evt.currentTarget as HTMLElement;
-      onAdCardMouseOver(+target.id);} : undefined}
+      dispatch(setCurrentOfferId(+target.id));} : undefined}
     >
       {
         isMainScreen &&

@@ -1,12 +1,10 @@
-import { Offer } from '../../types/offer';
 import FavoriteAdCard from '../favorite-ad-card/favorite-ad-card';
 import { CitiesName } from '../../const';
+import { useAppSelector } from '../../hooks';
 
-type FavoriteAdCardListProps = {
-    offers: Offer[];
-}
+export default function FavoriteAdCardList(): JSX.Element {
+  const offers = useAppSelector((state)=>state.filteredOffers);
 
-export default function FavoriteAdCardList({offers}: FavoriteAdCardListProps): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
