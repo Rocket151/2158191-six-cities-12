@@ -4,6 +4,8 @@ import { Offer } from '../../types/offer';
 import { sortOffers } from '../../utils';
 import AdCardList from '../ad-card-list/ad-card-list';
 import SortingTypeForm from '../sorting-type-form/sorting-type-form';
+import { getSortType } from '../../store/page-events/selectors';
+import { getCityName } from '../../store/offers-data/selectors';
 
 type offersBoardProps = {
     offers: Offer[];
@@ -11,8 +13,8 @@ type offersBoardProps = {
 
 
 export default function OffersBoard({offers}: offersBoardProps) {
-  const currentCity = useAppSelector((state)=>state.cityName);
-  const sortType = useAppSelector((state) => state.sortType);
+  const currentCity = useAppSelector(getCityName);
+  const sortType = useAppSelector(getSortType);
   const sortedOffers = useMemo(() => sortOffers(offers, sortType), [offers, sortType]);
 
   return(

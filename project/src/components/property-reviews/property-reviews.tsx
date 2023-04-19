@@ -1,8 +1,9 @@
 import { useAppSelector } from '../../hooks';
 import { getRatingStarsStyle } from '../../utils';
+import { getComments } from '../../store/current-offer-data/selectors';
 
 export default function PropertyReviews(): JSX.Element {
-  const reviews = useAppSelector((state) => state.currentOffer.comments);
+  const reviews = useAppSelector(getComments);
 
   return (
     <>

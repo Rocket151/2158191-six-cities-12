@@ -6,12 +6,14 @@ import AdCardList from '../../components/ad-card-list/ad-card-list';
 import Map from '../../components/map/map';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { useAppSelector } from '../../hooks';
+import { getCurrentOfferDataLoadingStatus, getNearbyOffers, getOfferInfo } from '../../store/current-offer-data/selectors';
+import { getAuthorizationStatus } from '../../store/authorization-user-process/selectors';
 
 export default function OfferScreen(): JSX.Element {
-  const offer = useAppSelector((state) => state.currentOffer.offerInfo);
-  const isCurrenOfferDataLoading = useAppSelector((state) => state.isCurrentOfferDataLoading);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const nearbyOffers = useAppSelector((state) => state.currentOffer.nearbyOffers);
+  const offer = useAppSelector(getOfferInfo);
+  const isCurrenOfferDataLoading = useAppSelector(getCurrentOfferDataLoadingStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
 
   if (offer && !isCurrenOfferDataLoading) {
     const {isFavorite, isPremium, description, goods, host, images, rating, maxAdults, price, title, type, bedrooms} = offer;

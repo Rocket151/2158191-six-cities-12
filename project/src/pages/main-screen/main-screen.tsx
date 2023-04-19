@@ -3,9 +3,10 @@ import Map from '../../components/map/map';
 import CitiesList from '../../components/cities-list/cities-list';
 import OffersBoard from '../../components/offers-board/offers-board';
 import { useAppSelector } from '../../hooks';
+import { getFilteredOffers } from '../../store/offers-data/selectors';
 
 export default function MainScreen(): JSX.Element {
-  const offers = useAppSelector((state)=>state.filteredOffers);
+  const offers = useAppSelector(getFilteredOffers);
 
   return (
     <div className="page page--gray page--main">

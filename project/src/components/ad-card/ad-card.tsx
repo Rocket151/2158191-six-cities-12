@@ -2,9 +2,9 @@ import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import { getRatingStarsStyle } from '../../utils';
 import { AdClasses } from '../../const';
-import { offerInfoInitAction } from '../../store/api-actions';
+import { fetchOfferInfoAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
-import { setCurrentOfferId } from '../../store/action';
+import { setCurrentOfferId } from '../../store/page-events/page-events';
 
 type AdCardProps = {
     offer: Offer;
@@ -52,7 +52,7 @@ export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element 
         </div>
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`} onClick={() => {
-            dispatch(offerInfoInitAction(id.toString()));
+            dispatch(fetchOfferInfoAction(id.toString()));
           }}
           >
             {title}
