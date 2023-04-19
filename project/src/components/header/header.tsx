@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getUserEmail, getAuthorizationStatus } from '../../store/authorization-user-process/selectors';
 
-function Header(): JSX.Element {
+export function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const userEmail = useAppSelector(getUserEmail);
   const dispatch = useAppDispatch();
