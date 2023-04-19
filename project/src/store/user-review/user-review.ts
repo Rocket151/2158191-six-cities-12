@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { sendOfferCommentAction } from '../api-actions';
 import { SlicesName } from '../../const';
 import { UserReview } from '../../types/state';
-import {currentOfferData} from '../current-offer-data/current-offer-data'
 
 const initialState: UserReview = {
   isCommentDataSending: false,

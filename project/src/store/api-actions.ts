@@ -16,10 +16,10 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   extra: AxiosInstance;
 }>(
   'fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
-    
-    return data
+
+    return data;
   },
 );
 
@@ -61,18 +61,18 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchOfferInfoAction = createAsyncThunk<{offerData: Offer, nearbyOffersData: Offer[], commentsData: Review[]}, string, {
+export const fetchOfferInfoAction = createAsyncThunk<{offerData: Offer; nearbyOffersData: Offer[]; commentsData: Review[]}, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'offerInfoInit',
-  async(id, {dispatch, extra: api}) => {
+  async(id, {extra: api}) => {
     const {data: offerData} = await api.get<Offer>(APIRoute.Offers + id);
     const {data: nearbyOffersData} = await api.get<Offer[]>(APIRoute.Offers + id + APIRoute.NearbyOffers);
     const {data: commentsData} = await api.get<Review[]>(APIRoute.Comment + id);
-    
-    return {offerData, nearbyOffersData, commentsData}
+
+    return {offerData, nearbyOffersData, commentsData};
   },
 );
 
@@ -87,10 +87,10 @@ export const sendOfferCommentAction = createAsyncThunk<Review[], {
     extra: AxiosInstance;
   }>(
     'sendOfferComment',
-    async({id, resetFormData, commentData}, {dispatch, extra: api}) => {
-        const {data} = await api.post<Review[]>(APIRoute.Comment + id, commentData);
-        resetFormData();
-        
-        return data;
-      }
+    async({id, resetFormData, commentData}, {extra: api}) => {
+      const {data} = await api.post<Review[]>(APIRoute.Comment + id, commentData);
+      resetFormData();
+
+      return data;
+    }
     );

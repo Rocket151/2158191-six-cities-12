@@ -6,11 +6,11 @@ import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 
 const initialState: CurrentOfferData = {
-   isCurrentOfferDataLoading: false,
-   offerInfo: null,
-   comments: [],
-   nearbyOffers:[],
-}
+  isCurrentOfferDataLoading: false,
+  offerInfo: null,
+  comments: [],
+  nearbyOffers:[],
+};
 
 export const currentOfferData = createSlice({
   name: SlicesName.CurrentOfferData,
@@ -22,8 +22,8 @@ export const currentOfferData = createSlice({
         state.isCurrentOfferDataLoading = true;
       })
       .addCase(fetchOfferInfoAction.fulfilled, (
-      state,
-      action: PayloadAction<{offerData: Offer; nearbyOffersData: Offer[]; commentsData: Review[]}>) => {
+        state,
+        action: PayloadAction<{offerData: Offer; nearbyOffersData: Offer[]; commentsData: Review[]}>) => {
         const {offerData, nearbyOffersData, commentsData} = action.payload;
         state.offerInfo = offerData;
         state.comments = commentsData;
