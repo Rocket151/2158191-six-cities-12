@@ -1,10 +1,12 @@
 import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import { getRatingStarsStyle } from '../../utils';
-import { AdClasses } from '../../const';
-import { fetchOfferInfoAction } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks';
+import { AdClasses, AppRoute } from '../../const';
+import { fetchOfferInfoAction, setOfferFavoriteStatusAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCurrentOfferId } from '../../store/page-events/page-events';
+import { browserHistory } from '../../browser-history';
+import { getAuthorizationStatus } from '../../store/authorization-user-process/selectors';
 
 type AdCardProps = {
     offer: Offer;
@@ -13,7 +15,17 @@ type AdCardProps = {
 
 export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element {
   const {isFavorite, isPremium, previewImage, price, title, type, rating, id} = offer;
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const favoriteStatus = `${+!isFavorite}`;
   const dispatch = useAppDispatch();
+  const handleFavoriteButtonClick = () => {
+    if(authorizationStatus !== 'AUTH') {
+      browserHistory.push(AppRoute.Login);
+
+      return;
+    }
+    dispatch(setOfferFavoriteStatusAction({id, favoriteStatus}));
+  };
 
   return (
     <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} id ={id.toString()} onMouseOver={isMainScreen ? (evt)=> {
@@ -37,7 +49,7 @@ export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element 
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`} type="button">
+          <button className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`} onClick={handleFavoriteButtonClick} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
